@@ -1,0 +1,31 @@
+classDiagram
+class Juego {
++mundo actual
+-Ejecutar()
+}
+class Entidad{
+
+
+}
+class Mundo {
++string Nombre
+-get LimiteX()
+-get LimiteY()
+-int enemigoseliminados()
+}
+class Enemigos {
+
+
+}
+class Jugador {
+-x()
+-y()
+}
+class Proyectil {
+
+
+}
+class aliado {
++string Ayuda
+
+}
