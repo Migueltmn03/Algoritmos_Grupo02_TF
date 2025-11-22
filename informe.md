@@ -1,3 +1,7 @@
+   <img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/3af7b134-8e9e-4a75-99c4-02b5c4c30655" />
+ 
+
+
 HITO 1 – Investigación y Storyboard
 1.	Investigación de casos reales (mínimo 6)
 Casos de decisiones tomadas por IA (2 casos):
@@ -37,38 +41,8 @@ o	Transformación de roles: un enemigo se convierte en aliado.
 •	Pregunta reflexiva inicial: ¿Es posible equilibrar confianza en la IA y pensamiento crítico humano?
 Propuesta de mensaje final crítico:
 “Ni la máquina ni el humano, sino la colaboración consciente permite un futuro sostenible y justo”.
-3.	Diagrama de clases UML (Versión 1 – Borrador)
-3. Diagrama de clases UML (Versión 1 – Borrador)
-Clases principales:
-•	Game: controla flujo general.
-•	Player: atributos (vida, puntaje, posición), métodos (moverse, interactuar).
-•	Enemy (clase base) → IAEnemy, HumanEnemy, HybridEnemy.
-•	Ally: apoya en interacciones.
-•	Resource: otorga experiencia o conocimiento.
-•	World (clase base) → WorldIA, WorldHuman, WorldCollaborative.
-Relaciones:
-•	Game contiene Player y gestiona Worlds.
-•	World contiene Enemies, Allies, Resources.
-•	Herencia: Enemy y World tienen subclases especializadas.
-
-4.	Plan de actividades (Versión inicial – ejemplo)
-N°	Actividad	Responsable	Estado	Observaciones
-			s11	s12	s13	s14	
-1	Diseño del diagrama de clase	Miguel	X	 	 	 	En proceso
-2	Prototipo de la solución	Miguel	 	 	 	 	En proceso
-3	Definir interface del videojuego	Lucas	X	 	 	 	En proceso
-4	Definir estructura de datos	Lucas	 	 	 	 	En proceso
-5	Implementar herencia	Miguel	X	 	 	 	En proceso
-6	Clase controladora	Miguel	 	 	 	 	En proceso
-7	Elaborar el menú	Justin	 	 	 	 	En proceso
-8	Clases complementarias	Miguel	 	 	 	 	En proceso
-9	Gestión archivos	Justin	 	 	 	 	En proceso
-10	Integrar clases complementarias al proyecto	Miguel	 	 	 	 	En proceso
-11	Pruebas integrales	Miguel	 	 	 	 	En proceso
-12	Redactar el informe	Lucas	 	 	 	 	En proceso
-13	Preparar la exposición	Justin	 	 	 	 	En proceso
-
-
+________________________________________
+3.	Diagrama de clases UML (versión inicial)
 ```classDiagram
 class Juego {
 +mundo actual
@@ -125,3 +99,10 @@ Mundo<--Entidad
 Proyectil<--Jugador
 Proyectil<--Enemigos
 ```
+
+4.	Plan de actividades (Versión inicial – ejemplo)
+<img width="665" height="331" alt="image" src="https://github.com/user-attachments/assets/d923e90c-99b9-41df-bc82-45b65b00970d" />
+
+
+
+
