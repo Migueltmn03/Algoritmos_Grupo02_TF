@@ -101,7 +101,24 @@ Proyectil<--Enemigos
 ```
 
 4.	Plan de actividades (Versión inicial – ejemplo)
-<img width="665" height="331" alt="image" src="https://github.com/user-attachments/assets/d923e90c-99b9-41df-bc82-45b65b00970d" />
+   
+| N° | Actividad | Responsable | Estado s11 | Estado s12 | Estado s13 | Estado s14 | Observaciones |
+|----|-----------|-------------|------------|------------|------------|------------|---------------|
+| 1 | Diseño del diagrama de clase | Miguel | X | | | | En proceso |
+| 2 | Prototipo de la solución | Miguel | | | | | En proceso |
+| 3 | Definir interface del videojuego | Lucas | X | | | | En proceso |
+| 4 | Definir estructura de datos | Lucas | | | | | En proceso |
+| 5 | Implementar herencia | Miguel | X | | | | En proceso |
+| 6 | Clase controladora | Miguel | | | | | En proceso |
+| 7 | Elaborar el menú | Justin | | | | | En proceso |
+| 8 | Clases complementarias | Miguel | | | | | En proceso |
+| 9 | Gestión archivos | Justin | | | | | En proceso |
+| 10 | Integrar clases complementarias al proyecto | Miguel | | | | | En proceso |
+| 11 | Pruebas integrales | Miguel | | | | | En proceso |
+| 12 | Redactar el informe | Lucas | | | | | En proceso |
+| 13 | Preparar la exposición | Justin | | | | | En proceso |
+
+
 
 
 
