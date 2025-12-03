@@ -44,60 +44,93 @@ Propuesta de mensaje final crítico:
 ________________________________________
 3.	Diagrama de clases UML (versión inicial)
 ```classDiagram
-class Juego {
-+mundo actual
--Ejecutar()
-}
-class Entidad{
-+posX:int
-+posY:int
--setVida():void
--mover(int dx, int dy):void
--getPosX():int
--getPosY():int
--mostrar():void
-}
-class Mundo {
-+Nombre:string 
--getLimiteX():int
--getLimiteY():int
--int enemigoseliminados()
--generarEnemigos()
--verificarColisiones()
-}
-class Enemigos {
--disparar():Proyectil   
--dano():int
--cooldownDisparo():void
--moverAutomatico()
+    class Proyectil {
+        -posX, posY: int
+        -velocidadX, velocidadY: int
+        -danio: int
+        -sprite: Bitmap^
+        +mover()
+        +disparar()
+    }
+    class Entidad {
+        <<abstract>>
+        #nombre: String^
+        #posX, posY: int
+        #vida: int
+        #sprite: Bitmap^
+        +mover()
+        +actualizar()*
+    }
+    class Jugador {
+        -experiencia: int
+        -puntos: int
+        +moverConTeclado()
+        +disparar()
+        +ganarExperiencia()
+    }
+    class Enemigo {
+        <<abstract>>
+        #danio: int
+        +disparar()
+        +moverAutomatico()*
+    }
+    class EnemigoMaquina {
+        +moverAutomatico()
+    }
+    class EnemigoHumano {
+        +moverAutomatico()
+    }
+    class EnemigoHibrido {
+        -modoIA: bool
+        +moverAutomatico()
+    }
+    class Aliado {
+        <<abstract>>
+        #tipoAyuda: String^
+        +ayudar()*
+    }
+    class AliadoMaquina {
+        +ayudar()
+    }
+    class AliadoHumano {
+        +ayudar()
+    }
+    class AliadoHibrido {
+        +ayudar()
+    }
+    class Mundo {
+        -nombre: String^
+        -enemigos: List~Enemigo^~
+        -aliados: List~Aliado^~
+        -proyectiles: List~Proyectil*~
+        +generarEnemigos()
+        +actualizarEntidades()
+        +verificarColisiones()
+    }
+    class GameForm {
+        -jugador: Jugador^
+        -mundos: array~Mundo^~
+        -buffer: Bitmap^
+        +gameTimer_Tick()
+        +GameForm_Paint()
+    }
+    Entidad <|-- Jugador
+    Entidad <|-- Enemigo
+    Entidad <|-- Aliado
+    Enemigo <|-- EnemigoMaquina
+    Enemigo <|-- EnemigoHumano
+    Enemigo <|-- EnemigoHibrido
+    Aliado <|-- AliadoMaquina
+    Aliado <|-- AliadoHumano
+    Aliado <|-- AliadoHibrido
+    GameForm *-- Jugador
+    GameForm *-- Mundo
+    Mundo *-- Enemigo
+    Mundo *-- Aliado
+    Mundo *-- Proyectil
+    Jugador ..> Proyectil
+    Enemigo ..> Proyectil
 
-}
-class Jugador {
--disparar():Proyectil   
--dano():int
--cooldownDisparo():void
-}
-class Proyectil {
-+posX:int
-+posY:int
--mover()
--getPosX():int
--getPosY():int
--getDano():int
-
-}
-class aliado {
-+string Ayuda
--ayudar(Jugador* jugador)
-}
-
-Juego<--Mundo
-Entidad-->Jugador
-Entidad-->aliado
-Entidad-->Enemigos
-Mundo<--Entidad
-Proyectil<--Jugador
-Proyectil<--Enemigos
 ```
 
 4.	Plan de actividades (Versión inicial – ejemplo)
