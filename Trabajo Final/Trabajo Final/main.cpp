@@ -1,8 +1,13 @@
-#include <iostream>
+#include "Juego.h"
 
-using namespace std;
+using namespace GameIntro;
 
-int main() {
+[STAThreadAttribute]
+int main(array<System::String^>^ args)
+{
+    Application::EnableVisualStyles();
+    Application::SetCompatibleTextRenderingDefault(false);
 
-
+    Application::Run(gcnew MainMenuForm());
+    return 0;
 }
