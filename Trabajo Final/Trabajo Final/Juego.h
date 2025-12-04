@@ -190,6 +190,7 @@ namespace GameIntro {
         IntroForm(void)
         {
             InitializeComponent();
+            StartTypewriterEffect();
         }
 
     protected:
@@ -204,19 +205,37 @@ namespace GameIntro {
     private:
         System::ComponentModel::Container^ components;
         PictureBox^ picGif;
+        Label^ lblStory;
+        Timer^ typewriterTimer;
+        String^ fullText;
+        int currentCharIndex;
 
         void InitializeComponent(void)
         {
             this->picGif = (gcnew PictureBox());
+            this->lblStory = (gcnew Label());
+            this->typewriterTimer = (gcnew Timer());
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picGif))->BeginInit();
             this->SuspendLayout();
 
-            // picGif
-            this->picGif->Dock = System::Windows::Forms::DockStyle::Fill;
-            this->picGif->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-            this->picGif->BackColor = System::Drawing::Color::Black;
+            // Texto completo
+            this->fullText = L"En un rígido mundo futurista, un robot le presenta a su compañero humano la ruta a seguir, "
+                L"avalado por un 99.8% de éxito y calificado como la única opción lógica. A pesar de la certeza de los datos, "
+                L"el humano desconfía. La predictibilidad del sistema le hace sentir que hay una trampa que la intuición "
+                L"puede detectar, pero la máquina no.\n\n"
+                L"Durante un combate contra enemigos idénticos y predecibles, Alex intenta ejecutar una estrategia creativa "
+                L"y sorpresiva. Su plan es inmediatamente rechazado por el robot, quien impone el protocolo de combate estándar, "
+                L"argumentando que es más eficiente y que la cooperación debe maximizar el rendimiento.";
 
-            // Cargar el GIF (asegúrate de tener el archivo en la ruta correcta)
+            this->currentCharIndex = 0;
+
+            // picGif
+            this->picGif->Location = System::Drawing::Point(200, 50);
+            this->picGif->Size = System::Drawing::Size(400, 400);
+            this->picGif->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+            this->picGif->BackColor = System::Drawing::Color::Transparent;
+
+            // Cargar el GIF
             try {
                 this->picGif->Image = Image::FromFile("earth.gif");
             }
@@ -225,19 +244,61 @@ namespace GameIntro {
                     "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
             }
 
+            // lblStory
+            this->lblStory->AutoSize = false;
+            this->lblStory->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11, System::Drawing::FontStyle::Regular));
+            this->lblStory->ForeColor = System::Drawing::Color::White;
+            this->lblStory->Location = System::Drawing::Point(50, 470);
+            this->lblStory->Size = System::Drawing::Size(900, 180);
+            this->lblStory->Text = L"";
+            this->lblStory->BackColor = System::Drawing::Color::Transparent;
+
+            // typewriterTimer
+            this->typewriterTimer->Interval = 30; // Velocidad de escritura (ms por carácter)
+            this->typewriterTimer->Tick += gcnew System::EventHandler(this, &IntroForm::typewriterTimer_Tick);
+
             // Form
             this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-            this->ClientSize = System::Drawing::Size(800, 600);
+            this->ClientSize = System::Drawing::Size(1000, 680);
+            this->BackColor = System::Drawing::Color::Black;
             this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
             this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
             this->Text = L"Introducción";
+            this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &IntroForm::IntroForm_KeyDown);
             this->Click += gcnew System::EventHandler(this, &IntroForm::IntroForm_Click);
 
             // Add controls
+            this->Controls->Add(this->lblStory);
             this->Controls->Add(this->picGif);
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picGif))->EndInit();
             this->ResumeLayout(false);
+        }
+
+        void StartTypewriterEffect()
+        {
+            this->typewriterTimer->Start();
+        }
+
+        void typewriterTimer_Tick(System::Object^ sender, System::EventArgs^ e)
+        {
+            if (currentCharIndex < fullText->Length)
+            {
+                lblStory->Text = fullText->Substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+            }
+            else
+            {
+                typewriterTimer->Stop();
+            }
+        }
+
+        void IntroForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+        {
+            if (e->KeyCode == Keys::Space || e->KeyCode == Keys::Enter || e->KeyCode == Keys::Escape)
+            {
+                this->Close();
+            }
         }
 
         void IntroForm_Click(System::Object^ sender, System::EventArgs^ e)
@@ -294,11 +355,11 @@ namespace GameIntro {
 
             // lblTitle
             this->lblTitle->AutoSize = false;
-            this->lblTitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 32, System::Drawing::FontStyle::Bold));
+            this->lblTitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 28, System::Drawing::FontStyle::Bold));
             this->lblTitle->ForeColor = System::Drawing::Color::FromArgb(100, 200, 255);
             this->lblTitle->Location = System::Drawing::Point(0, 50);
             this->lblTitle->Size = System::Drawing::Size(600, 80);
-            this->lblTitle->Text = L"MI JUEGO";
+            this->lblTitle->Text = L"IA vs Pensamiento Crítico";
             this->lblTitle->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 
             // btnPlay
