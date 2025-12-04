@@ -1,18 +1,13 @@
-#include "GameIntro.h"
+#include "Header.h"
 
-using namespace System;
-using namespace System::Windows::Forms;
+using namespace GameIntro;
 
 [STAThreadAttribute]
-int main(array<String^>^ args)
+int main(array<System::String^>^ args)
 {
-    // Habilitar estilos visuales de Windows
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
 
-    // Crear y mostrar el formulario del menú principal
-    GameIntro::MainMenuForm^ mainMenu = gcnew GameIntro::MainMenuForm();
-    Application::Run(mainMenu);
-
+    Application::Run(gcnew MainMenuForm());
     return 0;
 }
