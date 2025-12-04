@@ -43,93 +43,112 @@ Propuesta de mensaje final crítico:
 “Ni la máquina ni el humano, sino la colaboración consciente permite un futuro sostenible y justo”.
 ________________________________________
 3.	Diagrama de clases UML (versión inicial)
-```classDiagram
-    class Proyectil {
-        -posX, posY: int
-        -velocidadX, velocidadY: int
-        -danio: int
-        -sprite: Bitmap^
-        +mover()
-        +disparar()
+```
+classDiagram
+    direction TB
+
+
+    class MainMenuForm {
+        +MainMenuForm()
+        -Label lblTitle
+        -Button btnPlay
+        -Button btnRules
+        -Button btnCredits
+        -Button btnExit
+        +btnPlay_Click()
+        +btnRules_Click()
+        +btnCredits_Click()
+        +btnExit_Click()
     }
-    class Entidad {
-        <<abstract>>
-        #nombre: String^
-        #posX, posY: int
-        #vida: int
-        #sprite: Bitmap^
-        +mover()
-        +actualizar()*
+
+    class RulesForm {
+        +RulesForm()
+        -Label lblTitle
+        -RichTextBox txtRules
+        -Button btnBack
+        +btnBack_Click()
     }
-    class Jugador {
-        -experiencia: int
-        -puntos: int
-        +moverConTeclado()
-        +disparar()
-        +ganarExperiencia()
+
+    class CreditsForm {
+        +CreditsForm()
+        -Label lblTitle
+        -Label lblCredits
+        -Button btnBack
+        +btnBack_Click()
     }
-    class Enemigo {
-        <<abstract>>
-        #danio: int
-        +disparar()
-        +moverAutomatico()*
+
+    class IntroForm {
+        +IntroForm()
+        -PictureBox picGif
+        -Label lblStory
+        -Timer typewriterTimer
+        -String fullText
+        -int currentCharIndex
+        +typewriterTimer_Tick()
+        +IntroForm_KeyDown()
     }
-    class EnemigoMaquina {
-        +moverAutomatico()
-    }
-    class EnemigoHumano {
-        +moverAutomatico()
-    }
-    class EnemigoHibrido {
-        -modoIA: bool
-        +moverAutomatico()
-    }
-    class Aliado {
-        <<abstract>>
-        #tipoAyuda: String^
-        +ayudar()*
-    }
-    class AliadoMaquina {
-        +ayudar()
-    }
-    class AliadoHumano {
-        +ayudar()
-    }
-    class AliadoHibrido {
-        +ayudar()
-    }
-    class Mundo {
-        -nombre: String^
-        -enemigos: List~Enemigo^~
-        -aliados: List~Aliado^~
-        -proyectiles: List~Proyectil*~
-        +generarEnemigos()
-        +actualizarEntidades()
-        +verificarColisiones()
-    }
+
     class GameForm {
-        -jugador: Jugador^
-        -mundos: array~Mundo^~
-        -buffer: Bitmap^
-        +gameTimer_Tick()
-        +GameForm_Paint()
+        +GameForm()
+        -PictureBox gameCanvas
+        -Timer gameTimer
+        -Bitmap mapImage
+        -Bitmap characterSprite
+        -List~Orb~ orbs
+        -Portal portal
+        -float playerX
+        -float playerY
+        -float currentTime
+        +GameTimer_Tick()
+        +GameCanvas_Paint()
+        +CheckCollision()
+        +CheckOrbCollection()
+        +CheckPortalEntry()
+        +LoadSecondMap()
+        +InitializeGame()
     }
-    Entidad <|-- Jugador
-    Entidad <|-- Enemigo
-    Entidad <|-- Aliado
-    Enemigo <|-- EnemigoMaquina
-    Enemigo <|-- EnemigoHumano
-    Enemigo <|-- EnemigoHibrido
-    Aliado <|-- AliadoMaquina
-    Aliado <|-- AliadoHumano
-    Aliado <|-- AliadoHibrido
-    GameForm *-- Jugador
-    GameForm *-- Mundo
-    Mundo *-- Enemigo
-    Mundo *-- Aliado
-    Mundo *-- Proyectil
-    Jugador ..> Proyectil
-    Enemigo ..> Proyectil
+
+    class TransitionForm {
+        +TransitionForm()
+        -Label lblStory
+        -Timer typewriterTimer
+        -Timer autoCloseTimer
+        -String fullText
+        +typewriterTimer_Tick()
+        +autoCloseTimer_Tick()
+    }
+
+    class Orb {
+        +float x
+        +float y
+        +bool collected
+        +float velocityX
+        +float velocityY
+        +float targetX
+        +float targetY
+        +float moveTimer
+        +UpdateMovement()
+        +SetRandomTarget()
+    }
+
+    class Portal {
+        +float x
+        +float y
+        +bool isActive
+        +float animPhase
+    }
+
+    MainMenuForm --> GameForm : 
+    MainMenuForm --> RulesForm : 
+    MainMenuForm --> CreditsForm : 
+    MainMenuForm --> IntroForm : 
+
+    IntroForm --> GameForm : 
+
+    GameForm --> TransitionForm : 
+    GameForm --> Orb : 
+    GameForm --> Portal : 
+
 
 ```
 
