@@ -1,13 +1,16 @@
-#include "Header.h"
+#include "MenuSystem.h"
 
-using namespace GameIntro;
+using namespace System;
+using namespace System::Windows::Forms;
 
 [STAThreadAttribute]
-int main(array<System::String^>^ args)
+int main()
 {
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
 
-    Application::Run(gcnew MainMenuForm());
+    // Iniciar con el menú principal
+    Application::Run(gcnew GameProject::MainMenuForm());
+
     return 0;
 }
